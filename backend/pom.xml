@@ -7,7 +7,9 @@
     <version>1.0-SNAPSHOT</version>
     <name>fitness-life</name>
     <description>Demo project for Spring Boot</description>
-    
+
+    <packaging>jar</packaging>
+
 	<properties>
         <java.version>11</java.version>
         <repackage.classifier/>
@@ -75,6 +77,17 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <compilerArgs>
+                        <source>11</source>
+                        <target>11</target>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
             <!-- NEEDED FOR DEPLOY -->
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
