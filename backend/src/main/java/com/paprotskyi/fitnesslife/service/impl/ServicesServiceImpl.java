@@ -45,7 +45,6 @@ public class ServicesServiceImpl implements ServicesService {
     @Override
     public ServiceDto update(ServiceDto toUpdate, Integer serviceId) {
         log.info("Service update request for id: {}", serviceId);
-        ServiceEntity
         return null;
     }
 }

@@ -10,5 +10,5 @@ public interface ServicesService {
 
     ServiceDto createOne(ServiceDto serviceDtoToCreate);
 
-    ServiceDto update(ServiceDto toUpdate);
+    ServiceDto update(ServiceDto toUpdate, Integer serviceId);
 }
