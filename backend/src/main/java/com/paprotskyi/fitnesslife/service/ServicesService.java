@@ -9,6 +9,4 @@ public interface ServicesService {
     Page<ServiceDto> findAll(Pageable pageable);
 
     ServiceDto createOne(ServiceDto serviceDtoToCreate);
-
-    ServiceDto update(ServiceDto toUpdate, Integer serviceId);
 }

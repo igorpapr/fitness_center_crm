@@ -10,21 +10,15 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@EqualsAndHashCode(of = {"id", "title"})
+@EqualsAndHashCode(of = {"id", "firstName", "lastName"})
 @NoArgsConstructor
 @AllArgsConstructor
-public class ServiceDto {
+public class CustomerDto {
 
     Integer id;
-
-    String title;
-
+    String firstName;
+    String lastName;
     LocalDateTime dateCreated;
-
-    Boolean active;
-
-    String description;
-
-    Float price;
+    String email;
 
 }

@@ -32,10 +32,4 @@ public class ServiceController {
         return new ResponseEntity<>(servicesService.createOne(serviceDtoToCreate), HttpStatus.CREATED);
     }
 
-    @PutMapping("/{serviceId}")
-    public ResponseEntity<ServiceDto> updateService(@RequestBody ServiceDto toUpdate,
-                                                    @PathVariable Integer serviceId) {
-        return new ResponseEntity<>(servicesService.update(toUpdate, serviceId), HttpStatus.OK);
-    }
-
 }

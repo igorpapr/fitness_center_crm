@@ -7,33 +7,33 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Entity(name = "service")
+@Entity(name = "customer")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ServiceEntity {
+public class CustomerEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
-    @Column(name = "title", nullable = false)
-    String title;
+    @Column(name = "first_name", nullable = false)
+    String firstName;
+
+    @Column(name = "last_name", nullable = false)
+    String lastName;
 
     @Column(name = "date_created", nullable = false)
     LocalDateTime dateCreated;
 
-    @Column(name = "active", nullable = false)
-    Boolean active;
-
-    @Column(name = "description")
-    String description;
-
-    @Column(name = "price")
-    Float price;
+    @Column(name = "email")
+    String email;
 
     @OneToMany(mappedBy = "customerEntity")
     List<OrderEntity> orderEntities;
+
+    @OneToMany(mappedBy = "customerEntity")
+    List<VisitationEntity> visitations;
 }

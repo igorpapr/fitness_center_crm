@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 import static lombok.AccessLevel.PRIVATE;
@@ -34,17 +35,12 @@ public class ServicesServiceImpl implements ServicesService {
     }
 
     @Override
+    @Transactional
     public ServiceDto createOne(ServiceDto serviceDtoToCreate) {
         log.info("Service create request with title: {}", serviceDtoToCreate.getTitle());
         ServiceEntity toCreateEntity = servicesMapper.toEntity(serviceDtoToCreate);
         ServiceEntity createdEntity = servicesRepository.save(toCreateEntity);
         log.info("Created service entity with id: {}", createdEntity.getId());
         return servicesMapper.toDto(createdEntity);
-    }
-
-    @Override
-    public ServiceDto update(ServiceDto toUpdate, Integer serviceId) {
-        log.info("Service update request for id: {}", serviceId);
-        return null;
     }
 }

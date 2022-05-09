@@ -1,11 +1,13 @@
 spring:
   datasource:
-    # Heroku DB
-    url: jdbc:postgresql://ec2-176-34-211-0.eu-west-1.compute.amazonaws.com:5432/dc95stcbfjr73h
-    username: toazurekmbehjx
-    password: 81ae43343533c7960ab00d1c080d9400371360eba6d91b0c756ec9d1c2cb64ac
+    # Heroku DB, default values are temporary for the development purpose, yes I know about profiles
+    url: jdbc:postgresql://${DB_HOST:ec2-54-75-184-144.eu-west-1.compute.amazonaws.com}:${DB_PORT:5432}/${DB_DATABASE:dfsg0q34lt28jl}
+    username: ${DB_USERNAME:hjvjocbhrkizxu}
+    password: ${DB_PASSWORD:416dca2eacb4d84fb6837ea535a26bcd36ceb9ba383c3fc06e25c4547ca2f9b1}
 
   jpa:
+    show-sql: true
+
     hibernate:
       ddl-auto: validate
 

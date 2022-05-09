@@ -6,9 +6,9 @@ public interface ControllerConstants {
 
     String SERVICE_BASE_PATH = BASE_PATH + "/service";
 
-    String ORDER_BASE_PATH = "order";
+    String ORDER_BASE_PATH = BASE_PATH + "/order";
 
-    String CUSTOMER_BASE_PATH = "customer";
+    String CUSTOMER_BASE_PATH = BASE_PATH + "/customer";
 
-    String VISITATION_BASE_PATH = "visitation";
+    String VISITATION_BASE_PATH = BASE_PATH + "/visitation";
 }
