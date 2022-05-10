@@ -9,10 +9,7 @@ import {ToastsComponent} from "./toasts/toasts.component";
 
 
 @NgModule({
-  declarations: [
-    NavbarComponent,
-    ToastsComponent
-  ],
+  declarations: [NavbarComponent, ToastsComponent],
   imports: [
     CommonModule,
     AppRoutingModule,
