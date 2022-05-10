@@ -1,4 +1,6 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
+import {ToastsService} from "../../core/services/toasts.service";
+
 //import {ToastsService} from "../../core/services/util/toasts.service";
 
 @Component({
@@ -8,8 +10,8 @@ import {Component, OnInit, TemplateRef} from '@angular/core';
 })
 export class ToastsComponent implements OnInit {
 
-  // constructor(public toastsService: ToastsService) {
-  // }
+  constructor(public toastsService: ToastsService) {
+  }
 
   ngOnInit(): void {
   }

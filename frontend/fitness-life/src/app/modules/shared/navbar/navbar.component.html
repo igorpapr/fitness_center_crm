@@ -1,1 +1,49 @@
-<p>navbar works!</p>
+<nav class="navbar navbar-expand-lg navbar-light bg fixed-top ">
+  <a class="navbar-brand" href="#">OrderMe</a>
+  <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse text-light" id="toggle">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="" (click)="isMenuCollapsed = true">Home</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/categories" (click)="isMenuCollapsed = true">Categories</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/goods" (click)="isMenuCollapsed = true">Goods</a>
+      </li>
+      <li *ngIf="isSignedIn" class="nav-item active">
+        <a class="nav-link" routerLink="/my-orders" (click)="isMenuCollapsed = true">My orders</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/admin-orders" (click)="isMenuCollapsed = true">Orders</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/info" (click)="isMenuCollapsed = true">Info</a>
+      </li>
+    </ul>
+    <label class="mr-1">Shop:</label>
+    <button *ngIf="isSignedIn" class="nav-item btn btn-outline-dark mr-1" routerLink="/profile">
+      My profile
+    </button>
+    <button class="nav-item btn btn-outline-dark mr-1"
+            routerLink="/cart">
+      Cart
+    </button>
+    <button *ngIf="!isSignedIn" class="nav-item btn btn-outline-dark mr-1"
+            (click)="openSignInForm()">
+      Sign In
+    </button>
+    <button *ngIf="!isSignedIn" class="nav-item btn btn-outline-dark mr-1"
+            (click)="openSignUpForm()">
+      Sign Up
+    </button>
+    <button *ngIf="isSignedIn" class="nav-item btn btn-outline-dark mr-1"
+            (click)="logOut()">
+      Log out
+    </button>
+  </div>
+</nav>
