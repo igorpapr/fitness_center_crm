@@ -14,9 +14,9 @@ public class OrderDto {
 
     Integer id;
     @NotNull
-    CustomerDto customerDto;
+    CustomerDto customer;
     @NotNull
-    ServiceDto serviceDto;
+    ServiceDto service;
     LocalDateTime dateStart;
     LocalDateTime dateEnd;
     Float paymentAmount;

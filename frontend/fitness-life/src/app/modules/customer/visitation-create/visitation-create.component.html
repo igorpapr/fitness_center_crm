@@ -1,0 +1,70 @@
+<div class="m-3">
+  <p class="display-4">New Visitation creation</p>
+</div>
+<div>
+  <h1 class="m-3 h1 lead">Choose customer's order</h1>
+  <table class="table table-striped" *ngIf="!isLoading; else loading">
+    <thead>
+    <tr>
+      <th scope="col">Order Id</th>
+      <th scope="col">Service Title</th>
+      <th scope="col">Date Start</th>
+      <th scope="col">Date End</th>
+      <th scope="col">Payment Amount</th>
+    </tr>
+    </thead>
+    <tbody *ngIf="paginationObject">
+    <tr [ngClass]="{'font-weight-bold': chosenOrder && order.id==chosenOrder.id }"
+        *ngFor="let order of paginationObject.content">
+      <th scope="row">{{ order.id }}</th>
+      <td>{{ order.service.title}}</td>
+      <td>{{ order.dateStart | date:dateService.datePattern:dateService.currentTimezone}}</td>
+      <td>{{ order.dateEnd ? (order.dateEnd | date:dateService.datePattern:dateService.currentTimezone) : ' - '}}</td>
+      <td>
+        <button (click)="chooseOrder($event, order)" class="btn btn-info">Chose this order</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div *ngIf="paginationObject && !isEmpty" class="row w-100 mt-2 justify-content-center">
+    <ngb-pagination [collectionSize]="paginationObject ? paginationObject.totalElements : 0" [pageSize]="pageSize"
+                    [(page)]="currentPageNumber" [maxSize]="5" (pageChange)="changePage($event)"></ngb-pagination>
+  </div>
+</div>
+<hr>
+<div *ngIf="chosenOrder" class="m-3">
+  <h2>Selected order with id and service title: #{{chosenOrder.id}}, '{{chosenOrder.service.title}}'</h2>
+</div>
+<h1 class="m-3 h1 lead">Fill the remaining form: </h1>
+<div class="container">
+  <div class="row">
+    <form [formGroup]="visitationCreationFormGroup" (ngSubmit)="saveNewVisitation()">
+      <div class="form-group">
+        <label class="control-label lead">Date Start: <span class="text-danger">*</span></label>
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd"
+                 name="dp" ngbDatepicker #d="ngbDatepicker" formControlName="DateStart">
+          <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+        </div>
+        <small id="startHelper" class="form-text text-muted">Enter date start</small>
+      </div>
+      <div class="form-group">
+        <label class="control-label lead">Date End: <span class="text-danger">*</span></label>
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd"
+                 name="dp" ngbDatepicker #de="ngbDatepicker" formControlName="DateEnd">
+          <button class="btn btn-outline-secondary calendar" (click)="de.toggle()" type="button"></button>
+        </div>
+        <small id="endHelper" class="form-text text-muted">Enter date end</small>
+      </div>
+      <button class="btn btn-primary pull-right" [disabled]="!visitationCreationFormGroup.valid" type="submit">Submit
+      </button>
+    </form>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="card-body text-center">
+    <fa-icon [icon]="faSpinner" [spin]="true" size="6x"></fa-icon>
+  </div>
+</ng-template>

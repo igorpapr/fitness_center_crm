@@ -20,8 +20,8 @@ public interface OrderMapper {
             expression = "java(dto.getDateStart() != null ? dto.getDateStart() : LocalDateTime.now())")
     OrderEntity toCreateEntity(OrderDto dto);
 
-    @Mapping(target = "customerDto", source = "customerEntity")
-    @Mapping(target = "serviceDto", source = "serviceEntity")
+    @Mapping(target = "customer", source = "customerEntity")
+    @Mapping(target = "service", source = "serviceEntity")
     OrderDto toDto(OrderEntity entity);
 
     List<OrderDto> toDtoList(List<OrderEntity> entities);

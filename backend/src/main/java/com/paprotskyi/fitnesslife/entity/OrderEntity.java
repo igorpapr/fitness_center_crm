@@ -6,7 +6,7 @@ import lombok.experimental.FieldDefaults;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity(name = "\"order\"")
+@Entity(name = "order")
 @Getter
 @Setter
 @AllArgsConstructor

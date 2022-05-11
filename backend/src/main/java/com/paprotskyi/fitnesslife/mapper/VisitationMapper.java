@@ -20,8 +20,8 @@ public interface VisitationMapper {
             expression = "java(dto.getDateStart() != null ? dto.getDateStart() : LocalDateTime.now())")
     VisitationEntity toCreateEntity(VisitationDto dto);
 
-    @Mapping(target = "customerDto", source = "customerEntity")
-    @Mapping(target = "orderDto", source = "orderEntity")
+    @Mapping(target = "customer", source = "customerEntity")
+    @Mapping(target = "order", source = "orderEntity")
     VisitationDto toDto(VisitationEntity entity);
 
     List<VisitationDto> toDtoList(List<VisitationEntity> entities);

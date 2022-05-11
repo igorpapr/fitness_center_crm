@@ -15,6 +15,7 @@ public interface ServicesMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "dateCreated",
             expression = "java(dto.getDateCreated() != null ? dto.getDateCreated() : LocalDateTime.now())")
+    @Mapping(target = "active", constant = "true")
     ServiceEntity toEntity(ServiceDto dto);
 
     ServiceDto toDto(ServiceEntity entity);

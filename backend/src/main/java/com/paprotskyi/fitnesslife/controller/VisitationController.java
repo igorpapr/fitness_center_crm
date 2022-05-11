@@ -31,7 +31,7 @@ public class VisitationController {
     }
 
     @PostMapping
-    public ResponseEntity<VisitationDto> createOrder(@Valid @RequestBody VisitationDto dtoToCreate) {
+    public ResponseEntity<VisitationDto> createVisitation(@Valid @RequestBody VisitationDto dtoToCreate) {
         return new ResponseEntity<>(visitationService.createOne(dtoToCreate), HttpStatus.CREATED);
     }
 

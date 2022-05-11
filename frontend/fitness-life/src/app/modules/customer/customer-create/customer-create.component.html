@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <p class="display-4">New Customer creation</p>
+  </div>
+  <div class="row">
+    <form [formGroup]="customerCreationFormGroup" (ngSubmit)="saveNewCustomer()" >
+      <div class="form-group">
+        <label class="control-label lead" for="firstName">First name: <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="firstName" aria-describedby="titleHelper" placeholder="Enter customer's first name" formControlName="FirstName" required>
+        <small id="firstNameHelper" class="form-text text-muted">Enter first name</small>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label lead" for="lastName">Last name: </label><span class="text-danger">*</span>
+        <input type="text" class="form-control" id="lastName" aria-describedby="descriptionHelper" placeholder="Enter customer's last name" formControlName="LastName" required>
+        <small id="lastNameHelper" class="form-text text-muted">Enter last name</small>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label lead" for="email">Email: </label><span class="text-danger">*</span>
+        <input type="text" class="form-control" id="email" aria-describedby="descriptionHelper" placeholder="Enter customer's last name" formControlName="Email" required>
+        <small id="emailHelper" class="form-text text-muted">Enter email</small>
+      </div>
+      <button class="btn btn-primary pull-right" [disabled]="!customerCreationFormGroup.valid" type="submit">Submit</button>
+    </form>
+  </div>
+</div>

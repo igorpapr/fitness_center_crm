@@ -10,6 +10,9 @@ import {CoreModule} from "./modules/core/core.module";
 import {SharedModule} from "./modules/shared/shared.module";
 import {MainModule} from "./modules/main/main.module";
 import {ReactiveFormsModule} from "@angular/forms";
+import {FitnessServicesModule} from "./modules/fitness-services/fitness-services.module";
+import {CustomerModule} from "./modules/customer/customer.module";
+import {OrderModule} from "./modules/order/order.module";
 
 @NgModule({
   declarations: [
@@ -25,6 +28,9 @@ import {ReactiveFormsModule} from "@angular/forms";
     SharedModule,
     MainModule,
     ReactiveFormsModule,
+    FitnessServicesModule,
+    CustomerModule,
+    OrderModule
     //NgBootstrapFormValidationModule.forRoot(),
     //NgBootstrapFormValidationModule,
   ],

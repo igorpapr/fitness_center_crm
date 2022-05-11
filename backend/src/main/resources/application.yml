@@ -1,4 +1,7 @@
 spring:
+  main:
+    allow-bean-definition-overriding: true
+    allow-circular-references: true
   datasource:
     # Heroku DB, default values are temporary for the development purpose, yes I know about profiles
     url: jdbc:postgresql://${DB_HOST:ec2-54-75-184-144.eu-west-1.compute.amazonaws.com}:${DB_PORT:5432}/${DB_DATABASE:dfsg0q34lt28jl}
@@ -10,6 +13,8 @@ spring:
 
     hibernate:
       ddl-auto: validate
+    properties:
+      hibernate.default_schema: public
 
 server:
   port: 9002

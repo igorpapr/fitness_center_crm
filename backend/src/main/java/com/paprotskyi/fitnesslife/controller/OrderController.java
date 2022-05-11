@@ -23,9 +23,17 @@ public class OrderController {
 
     OrderService orderService;
 
-    @GetMapping
-    public ResponseEntity<Page<OrderDto>> getOrders(Pageable pageable) {
-        return new ResponseEntity<>(orderService.findAll(pageable), HttpStatus.OK);
+    @GetMapping("/by_service")
+    public ResponseEntity<Page<OrderDto>> getOrdersByService(@RequestParam Integer serviceId,
+                                                             Pageable pageable) {
+        return new ResponseEntity<>(orderService.findAllByService(serviceId, pageable), HttpStatus.OK);
+    }
+
+    //yes, I know that REST API is not created in that way, I'm just doing this asap
+    @GetMapping("/by_customer")
+    public ResponseEntity<Page<OrderDto>> getOrdersByCustomer(@RequestParam Integer customerId,
+                                                             Pageable pageable) {
+        return new ResponseEntity<>(orderService.findAllByCustomer(customerId, pageable), HttpStatus.OK);
     }
 
     @PostMapping

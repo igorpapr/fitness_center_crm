@@ -36,10 +36,6 @@ export class NavbarComponent implements OnInit {
     //this.modalService.open(SigninComponent);
   }
 
-  openSignUpForm() {
-    //this.modalService.open(SignupComponent);
-  }
-
   logOut() {
     this.router.navigate(['/']).then(
       () => {

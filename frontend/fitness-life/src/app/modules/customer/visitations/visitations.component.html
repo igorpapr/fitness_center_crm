@@ -1,0 +1,38 @@
+<p *ngIf="customerFromState" class="display-4 ml-4">Visitations of customer: {{customerFromState.firstName}} {{customerFromState.lastName}}</p>
+<hr>
+<div class="m-3">
+  <button (click)="navigateVisitationCreation($event)" class="btn btn-primary">Create order for this service</button>
+</div>
+<table class="table table-striped" *ngIf="!isLoading && !isEmpty; else (isLoading ? loading : empty)" >
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Order Id<th>
+    <th scope="col">Date Start</th>
+    <th scope="col">Date End</th>
+  </tr>
+  </thead>
+  <tbody *ngIf="paginationObject">
+  <tr *ngFor="let visitation of paginationObject.content">
+    <th scope="row">{{ visitation.id }}</th>
+    <td>{{ visitation.order ? visitation.order.id : ' - '}}</td><td></td>
+    <td>{{ visitation.dateStart ? (visitation.dateStart | date:dateService.datePattern:dateService.currentTimezone) : ' - '}}</td>
+    <td>{{ visitation.dateEnd ? (visitation.dateEnd | date:dateService.datePattern:dateService.currentTimezone) : ' - '}}</td>
+  </tr>
+  </tbody>
+</table>
+
+<div *ngIf="paginationObject && !isEmpty" class="row w-100 mt-2 justify-content-center">
+  <ngb-pagination [collectionSize]="paginationObject ? paginationObject.totalElements : 0" [pageSize]="pageSize"
+                  [(page)]="currentPageNumber" [maxSize]="5" (pageChange)="changePage($event)"></ngb-pagination>
+</div>
+
+<ng-template #loading>
+  <div class="card-body text-center">
+    <fa-icon [icon]="faSpinner" [spin]="true" size="6x"></fa-icon>
+  </div>
+</ng-template>
+
+<ng-template #empty>
+  <p class="lead h2 ml-4">This customer has no visitations yet.</p>
+</ng-template>

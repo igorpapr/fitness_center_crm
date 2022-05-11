@@ -38,8 +38,15 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public Page<OrderDto> findAll(Pageable pageable) {
-        Page<OrderEntity> entityPage = orderRepository.findAll(pageable);
+    public Page<OrderDto> findAllByService(Integer serviceId, Pageable pageable) {
+        Page<OrderEntity> entityPage = orderRepository.findAllByServiceEntityId(serviceId, pageable);
+        List<OrderDto> dtos = orderMapper.toDtoList(entityPage.getContent());
+        return new PageImpl<>(dtos, entityPage.getPageable(), entityPage.getTotalElements());
+    }
+
+    @Override
+    public Page<OrderDto> findAllByCustomer(Integer customerId, Pageable pageable) {
+        Page<OrderEntity> entityPage = orderRepository.findAllByCustomerEntityId(customerId, pageable);
         List<OrderDto> dtos = orderMapper.toDtoList(entityPage.getContent());
         return new PageImpl<>(dtos, entityPage.getPageable(), entityPage.getTotalElements());
     }
@@ -47,8 +54,8 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional
     public OrderDto createOne(OrderDto dtoToCreate) {
-        CustomerDto customerDto = dtoToCreate.getCustomerDto();
-        ServiceDto serviceDto = dtoToCreate.getServiceDto();
+        CustomerDto customerDto = dtoToCreate.getCustomer();
+        ServiceDto serviceDto = dtoToCreate.getService();
         log.info("Customer order request with customer id: {} and service id: {}",
                 customerDto.getId(), serviceDto.getId());
         CustomerEntity customerEntity = customerRepository.findById(customerDto.getId())

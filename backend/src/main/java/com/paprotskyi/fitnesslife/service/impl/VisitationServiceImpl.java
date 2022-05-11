@@ -47,8 +47,8 @@ public class VisitationServiceImpl implements VisitationService {
     @Override
     @Transactional
     public VisitationDto createOne(VisitationDto dtoToCreate) {
-        CustomerDto customerDto = dtoToCreate.getCustomerDto();
-        OrderDto orderDto = dtoToCreate.getOrderDto();
+        CustomerDto customerDto = dtoToCreate.getCustomer();
+        OrderDto orderDto = dtoToCreate.getOrder();
         OrderEntity orderEntity = null;
         if (orderDto != null) {
             log.info("Visitation request with customer id: {} and order id: {}",

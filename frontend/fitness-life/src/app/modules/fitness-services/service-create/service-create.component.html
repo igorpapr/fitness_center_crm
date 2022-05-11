@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <p class="display-4">New Service creation</p>
+  </div>
+  <div class="row">
+    <form [formGroup]="serviceCreationFormGroup" (ngSubmit)="saveNewService()" >
+      <div class="form-group">
+        <label class="control-label lead" for="title">Title: <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="title" aria-describedby="titleHelper" placeholder="Enter title" formControlName="Title" required>
+        <small id="titleHelper" class="form-text text-muted">Enter title (min 3 symbols)</small>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label lead" for="description">Description: </label><span class="text-danger">*</span>
+        <textarea type="text" class="form-control" id="description" aria-describedby="descriptionHelper" placeholder="Enter description" formControlName="Description" required></textarea>
+        <small id="descriptionHelper" class="form-text text-muted">Enter description (min 3 symbols)</small>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label lead" for="price">Price: </label><span class="text-danger">*</span>
+        <input type="number" step="1" min="0" class="form-control" id="price" aria-describedby="priceHelper" placeholder="Enter price" formControlName="Price" required>
+        <small id="priceHelper" class="form-text text-muted">Enter price greater that 0</small>
+      </div>
+      <button class="btn btn-primary pull-right" [disabled]="!serviceCreationFormGroup.valid" type="submit">Submit</button>
+    </form>
+  </div>
+</div>

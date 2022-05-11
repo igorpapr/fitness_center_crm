@@ -15,9 +15,9 @@ public class VisitationDto {
     Integer id;
 
     @NotNull
-    CustomerDto customerDto;
+    CustomerDto customer;
 
-    OrderDto orderDto;
+    OrderDto order;
 
     LocalDateTime dateStart;
 

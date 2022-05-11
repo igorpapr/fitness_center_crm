@@ -6,7 +6,9 @@ import org.springframework.data.domain.Pageable;
 
 public interface OrderService {
 
-    Page<OrderDto> findAll(Pageable pageable);
+    Page<OrderDto> findAllByService(Integer serviceId, Pageable pageable);
+
+    Page<OrderDto> findAllByCustomer(Integer customerId, Pageable pageable);
 
     OrderDto createOne(OrderDto dtoToCreate);
 
