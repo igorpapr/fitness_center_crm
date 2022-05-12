@@ -11,4 +11,8 @@ public interface ControllerConstants {
     String CUSTOMER_BASE_PATH = BASE_PATH + "/customer";
 
     String VISITATION_BASE_PATH = BASE_PATH + "/visitation";
+
+    String AUTH_PATH = BASE_PATH + "/auth";
+
+    String CHILD_AUTH_PATH = "/authenticate";
 }

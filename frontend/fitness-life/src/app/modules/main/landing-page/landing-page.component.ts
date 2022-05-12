@@ -8,9 +8,12 @@ import {AuthenticationService} from "../../core/services/auth/authentication.ser
 })
 export class LandingPageComponent implements OnInit {
 
+  isSignedIn?: boolean = false;
+
   constructor(private authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
+    this.isSignedIn = this.authenticationService.isAuthenticated()
   }
 
 }

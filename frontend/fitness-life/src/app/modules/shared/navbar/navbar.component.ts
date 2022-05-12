@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from "../../core/services/auth/authentication.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {Router} from "@angular/router";
 import {UserRole} from "../../core/model/user-role";
+import {SigninComponent} from "../../auth/signin/signin.component";
 
 @Component({
   selector: 'app-navbar',
@@ -33,7 +34,7 @@ export class NavbarComponent implements OnInit {
   }
 
   openSignInForm() {
-    //this.modalService.open(SigninComponent);
+    this.modalService.open(SigninComponent);
   }
 
   logOut() {

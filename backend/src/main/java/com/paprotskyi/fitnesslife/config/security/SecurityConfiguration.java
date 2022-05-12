@@ -21,10 +21,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import static com.paprotskyi.fitnesslife.constants.RolesConstants.AUTHORITY_ADMIN;
+
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
-    //private final UserDetailsService userDetailsService;
+    @Qualifier("userDetailsServiceImpl")
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
@@ -32,26 +36,29 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter implemen
     @Autowired
     private ExceptionHandlerChainFilter exceptionHandlerChainFilter;
 
-//    public SecurityConfiguration(JwtAuthenticationFilter jwtAuthenticationFilter,
-//                                 //@Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService,
-//                                 ExceptionHandlerChainFilter exceptionHandlerChainFilter) {
-//        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
-//        //this.userDetailsService = userDetailsService;
-//        this.exceptionHandlerChainFilter = exceptionHandlerChainFilter;
-//    }
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //auth.userDetailsService(userDetailsService);
+        auth.userDetailsService(userDetailsService);
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .cors().disable()
-                .exceptionHandling().authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
+        http.csrf().disable().cors()
+                .and().exceptionHandling().authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
                 .and()
                 .authorizeRequests()
+                .antMatchers(HttpMethod.POST,
+                        ControllerConstants.CUSTOMER_BASE_PATH + "/**",
+                        ControllerConstants.ORDER_BASE_PATH + "/**",
+                        ControllerConstants.SERVICE_BASE_PATH + "/**",
+                        ControllerConstants.VISITATION_BASE_PATH + "/**")
+                .hasAuthority(AUTHORITY_ADMIN)
+                .antMatchers(HttpMethod.GET,
+                        ControllerConstants.CUSTOMER_BASE_PATH + "/**",
+                        ControllerConstants.ORDER_BASE_PATH + "/**",
+                        ControllerConstants.SERVICE_BASE_PATH + "/**",
+                        ControllerConstants.VISITATION_BASE_PATH + "/**")
+                .hasAuthority(AUTHORITY_ADMIN)
                 .anyRequest().permitAll()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER)
                 .and().addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)

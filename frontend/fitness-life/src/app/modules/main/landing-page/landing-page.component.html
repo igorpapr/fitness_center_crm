@@ -1,26 +1,38 @@
-<div class="container">
-  <div class="row">
-    <div class="col">
+<div *ngIf="!isSignedIn">
+  <div class="container">
+    <div class="row">
       <p class="display-1">Welcome to Fitness Life!</p>
-      <p class="lead">
-        Feel free to navigate through services, customers or visitations.
+      <p class="lead text-danger">
+        Please use the sign in form to get access to the system.
       </p>
     </div>
   </div>
 </div>
-<a routerLink="/services" class="link">
-  <div class="bg jumbotron jumbotron-fluid">
-    <div class="container">
-      <h1 class="display-4">Services</h1>
-      <p class="lead">List of services and their configuration</p>
+<div *ngIf="isSignedIn">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <p class="display-1">Welcome to Fitness Life!</p>
+        <p class="lead">
+          Feel free to navigate through services, customers or visitations.
+        </p>
+      </div>
     </div>
   </div>
-</a>
-<a routerLink="/customers" class="link">
-  <div class="bg jumbotron jumbotron-fluid">
-    <div class="container">
-      <h1 class="display-4">Customers</h1>
-      <p class="lead">List of customers and operations on them.</p>
+  <a routerLink="/services" class="link">
+    <div class="bg jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">Services</h1>
+        <p class="lead">List of services and their configuration</p>
+      </div>
     </div>
-  </div>
-</a>
+  </a>
+  <a routerLink="/customers" class="link">
+    <div class="bg jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">Customers</h1>
+        <p class="lead">List of customers and operations on them.</p>
+      </div>
+    </div>
+  </a>
+</div>

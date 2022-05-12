@@ -1,7 +1,15 @@
 package com.paprotskyi.fitnesslife.config.security;
 
+import com.paprotskyi.fitnesslife.utils.JwtUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -14,33 +22,33 @@ import java.io.IOException;
 @Slf4j
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-//    private final UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
 
-//    public JwtAuthenticationFilter(@Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService) {
-//        this.userDetailsService = userDetailsService;
-//    }
+    public JwtAuthenticationFilter(@Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
 
     @Override
     protected void doFilterInternal(
             HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws IOException, ServletException {
-//        String jwt = getJwtFromHeaders(request);
-//        String username = null;
-//        if (StringUtils.hasText(jwt)) {
-//            username = JwtUtils.extractUsername(jwt);
-//        }
-//        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-//            UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
-//            //TODO get user from token and create UsernamePasswordAuthenticationToken from the given jwt, don't forget to add the FACADE
-//            if (JwtUtils.validateToken(jwt, userDetails)) {
-//                UsernamePasswordAuthenticationToken token =
-//                        new UsernamePasswordAuthenticationToken(userDetails,
-//                                null, userDetails.getAuthorities());
-//                token.setDetails(
-//                        new WebAuthenticationDetailsSource().buildDetails(request));
-//                SecurityContextHolder.getContext().setAuthentication(token);
-//            }
-//        }
+        String jwt = getJwtFromHeaders(request);
+        String username = null;
+        if (StringUtils.hasText(jwt)) {
+            username = JwtUtils.extractUsername(jwt);
+        }
+        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
+            //TODO get user from token and create UsernamePasswordAuthenticationToken from the given jwt, don't forget to add the FACADE
+            if (JwtUtils.validateToken(jwt, userDetails)) {
+                UsernamePasswordAuthenticationToken token =
+                        new UsernamePasswordAuthenticationToken(userDetails,
+                                null, userDetails.getAuthorities());
+                token.setDetails(
+                        new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(token);
+            }
+        }
         filterChain.doFilter(request, response);
     }
 

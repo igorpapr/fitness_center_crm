@@ -1,9 +1,9 @@
 export class AuthenticationRequestDto {
-  email: string | undefined;
+  login: string | undefined;
   password: string | undefined;
 
   constructor(email: string, password: string) {
-    this.email = email;
+    this.login = email;
     this.password = password;
   }
 

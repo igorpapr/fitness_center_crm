@@ -7,6 +7,7 @@ import {LocalStorageService} from "../util/local-storage.service";
 import {map} from "rxjs/operators";
 import {UserData} from "../../model/user-data";
 import {AuthenticationRequestDto} from "../../model/dto/authentication-request";
+import jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -59,6 +60,7 @@ export class AuthenticationService {
       this.httpOptions)
       .pipe(map(data => {
           const jsonResponse: any = data;
+          console.log(jsonResponse.jwt)
           this.localStorageService.setJwt(jsonResponse.jwt);
           // @ts-ignore
           const decodedUserData: UserData = jwt_decode(jsonResponse.jwt);

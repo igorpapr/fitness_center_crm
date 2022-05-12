@@ -9,10 +9,10 @@
       <li class="nav-item active">
         <a class="nav-link" routerLink="" (click)="isMenuCollapsed = true">Home</a>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item active" *ngIf="isSignedIn">
         <a class="nav-link" routerLink="/services" (click)="isMenuCollapsed = true">Services</a>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item active" *ngIf="isSignedIn">
         <a class="nav-link" routerLink="/customers" (click)="isMenuCollapsed = true">Customers</a>
       </li>
     </ul>
