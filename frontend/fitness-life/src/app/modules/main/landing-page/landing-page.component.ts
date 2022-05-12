@@ -16,4 +16,6 @@ export class LandingPageComponent implements OnInit {
     this.isSignedIn = this.authenticationService.isAuthenticated()
   }
 
+
+
 }
